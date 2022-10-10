@@ -1,0 +1,29 @@
+NAME, GENDER, AGE = range(3)
+
+
+
+def start_handler(bot: Bot, update: Update):
+    update.message.reply_text('Введите пожалуйста ФИО',reply_markup= ReplyKeyboardRemove(),)
+    return NAME
+
+
+
+def name_handler(bot: Bot, update: Update, user_data: dict):
+    user_data[NAME] = update.message.text
+    update.message.reply_text('Введите пожалуйста пол',reply_markup= ReplyKeyboardRemove(),)
+    return GENDER
+
+def age_handler(bot: Bot, update: Update, user_data: dict):
+    user_data[GENDER] = update.message.text
+    update.message.reply_text('Введите пожалуйста возраст',reply_markup= ReplyKeyboardRemove(),)
+    return AGE
+
+def finish_handler(bot: Bot, update: Update, user_data: dict):
+    user_data[AGE] = update.message.text
+    update.message.reply_text('Заявка сформирована', reply_markup=ReplyKeyboardRemove(), )
+    return ConversationHandler.END
+
+def cancel_handler(bot: Bot, update: Update, user_data: dict):
+
+    update.message.reply_text('Отмена', reply_markup=ReplyKeyboardRemove(), )
+    return ConversationHandler.END
